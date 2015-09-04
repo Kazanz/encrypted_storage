@@ -32,15 +32,15 @@ loaded_data = storage.load(filename, private_key)
 
 ## Backends
 
-OpenStackSwift
+### OpenStackSwift
 `storage = EncryptedSwiftStorage(container='credit_card_data')`
 
-Redis
+### Redis
 `storage = EncryptedRedisStorage(db_num=10)`
 
 Creating New RSA Keys
 =====================
-You can use whatever method you like to create new keys.  Just be sure the format is identical to the format of currently stored keys.  I recommend using Pycrypto to generate new keys as the encryption and encryption is based off of this package.  **Watch out for newlines if you copy and paste.**
+You can use whatever method you like to create new keys.  Just be sure the format is identical to the format of currently stored keys.  I recommend using Pycrypto to generate new keys as the encryption and encryption is based off of this package.  **Watch for newlines.**
 
 ```python
 from Crypto.PublicKey import RSA
@@ -55,13 +55,13 @@ Adding New Storage Backends
 
 To create new storage backends simply follow these 2 steps:
 
-1. Create a class that inherits from `BaseSharedStorage`.  This will do the saving and loading from your storage.  If you wanted to create a new MongoDB storage backend you would write your own `MongoDBStorage` class with `save` and `load` functions specific to MongoDB.
+- Create a class that inherits from `BaseSharedStorage`.  This will do the saving and loading from your storage.  If you wanted to create a new MongoDB storage backend you would write your own `MongoDBStorage` class with `save` and `load` functions specific to MongoDB.
 
 ```python
 class MongoDBStorage(BaseSharedStorage):
-    def __init__(self, myarg):
+    def __init__(self, host):
         # You can do init stuff here, like initializing your `pymongo.MongoClient`.
-        self.mongo = pymongo.MongoClient()
+        self.mongo = pymongo.MongoClient(host)
         
     def save(self, filename, key, data):
         # do the MongoDB saving
@@ -70,17 +70,17 @@ class MongoDBStorage(BaseSharedStorage):
         # do the MongoDB loading
 ```
 
-2. Then you would write a new `EncryptedMongoDBStorage class that would inherit from your MongoDBStorage class and the EncryptedSharedStorage class.
+- Write a new `EncryptedMongoDBStorage` class that would inherit from your `MongoDBStorage` class and the `EncryptedSharedStorage` class.
 
 ```python 
 class EncryptedMongoDBStorage(EncryptedSharedStorage, MongoDBStorage):
     def __init__(self, myarg):
-        super(EncryptedMongoDBStorage, self).__init__(myarg)
+        super(EncryptedMongoDBStorage, self).__init__(host)
 ```
 
 ## Rules
-1. Your new storage backend save function must always accept a filename, key, and data in that order.
-2. Your new storage backend load function must always accept a filename.
+1. Your new storage backend `save` function must always accept a `filename`, `key`, and `data` in that order.
+2. Your new storage backend `load` function must always accept a `filename`.
     
     
 Encryption w/o Storage
@@ -101,7 +101,6 @@ key = encrypt_cypher.key
 decrypt_cypher = AESCipher(key=key)
 decrypted = decrypt_cypher.decrypt(encrypted)
  
- 
 # For asymetrical encryption
 cypher = EncryptedSharedStorage()
 encrypted_key, encrypted_data = cypher.asym_encryption(data, public_key)
@@ -111,12 +110,10 @@ decrypted_data = cypher.asym_decryption(encrypted_key, encrypted_data, private_k
 Contributing
 ============
 
-If there is a backend you want that is not here, write one and open a pull request.
+1. Follow Pep8.
+2. Write tests.
 
-## Rules
-1. Follow Pep8
-2. Write Tests
-3. Add yourself to list of contributors.
+If there is a backend you want that is not here, write one and open a pull request.
 
 TODO
 ====
