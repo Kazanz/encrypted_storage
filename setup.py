@@ -1,43 +1,25 @@
-import os
 from setuptools import setup
-
-
-def build_install_requires(path):
-    basedir = os.path.dirname(path)
-    with open(path) as f:
-        reqs = []
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            if line[0] == '#':
-                continue
-            elif line.startswith('-r '):
-                nested_req = line[3:].strip()
-                nested_path = os.path.join(basedir, nested_req)
-                reqs += build_install_requires(nested_path)
-            elif line[0] == '-':
-                continue
-            else:
-                reqs.append(line)
-        return reqs
-
-
-reqs = build_install_requires('reqs/base.txt')
-
 
 if __name__ == '__main__':
     setup(
         name='encrypted-storage',
-        version='1.0.0',
+        version='1.0.1',
         author='Zach Kazanski',
         author_email='kazanski.zachary@gmail.com',
         description='Easy, cryptographically secure storage on numerous database backends.',
         url="https://github.com/Kazanz/encrypted_storage",
         download_url="https://github.com/kazanz/encrypted_storage/tarball/1.0.0",
         packages=['encrypted_storage'],
-        install_requires=reqs,
         keywords=['cryptography', 'encryption'],
+        install_requires=[
+            'futures==3.0.3',
+            'pycrypto==2.6.1',
+            'python-swiftclient==2.5.0',
+            'redis==2.10.3',
+            'requests==2.7.0',
+            'six==1.9.0',
+            'wsgiref==0.1.2',
+        ],
         classifiers=[
             'Programming Language :: Python',
             'Development Status :: 5 - Production/Stable',
