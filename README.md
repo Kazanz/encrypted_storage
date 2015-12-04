@@ -3,7 +3,7 @@ Encrypted Storage
 Encrypted Storage helps with saving and loading encrypted data in various storage backends.  It is implemented in a way to be able to add new backends easily by inheritance.
 
 ## How it works
-It does AES symetric encyrption of a file, then asymetric RSA encryption on the key from the intial symetric encryption.  These files are then saved in one of the various storage backends.
+It does AES symetric encryption of a file, then asymetric RSA encryption on the key from the intial symetric encryption.  These files are then saved in one of the various storage backends.
 
 ## Currently implemented backends
 - OpenStack Swift
