@@ -159,7 +159,8 @@ class SwiftStorage(BaseSharedStorage):
     Your settings must contain these variables:
     SWIFT_AUTH_URL, SWIFT_KEY, SWIFT_USER.
     """
-    def __init__(self, container, insecure=True):
+    def __init__(self, container, insecure=True, **settings):
+        super(SwiftStorage, self).__init__(**settings)
         self.swift = swiftclient.client.Connection(
             authurl=self.settings['SWIFT_AUTH_URL'],
             user=self.settings['SWIFT_USER'],
