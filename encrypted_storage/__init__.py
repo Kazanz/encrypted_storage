@@ -201,8 +201,8 @@ class SwiftStorage(BaseSharedStorage):
 
 
 class EncryptedRedisStorage(EncryptedSharedStorage, RedisStorage):
-    def __init__(self, db_num):
-        super(EncryptedRedisStorage, self).__init__(db_num)
+    def __init__(self, db_num, **kwargs):
+        super(EncryptedRedisStorage, self).__init__(db_num, **kwargs)
     """
     Init with the db number for redis.
     When calling save() | .save(filename, data, public_key).
@@ -213,8 +213,8 @@ class EncryptedRedisStorage(EncryptedSharedStorage, RedisStorage):
 
 
 class EncryptedSwiftStorage(EncryptedSharedStorage, SwiftStorage):
-    def __init__(self, container, insecure=True):
-        super(EncryptedSwiftStorage, self).__init__(container, insecure)
+    def __init__(self, container, insecure=True, **kwargs):
+        super(EncryptedSwiftStorage, self).__init__(container, insecure, **kwargs)
     """
     Init with the container_name for swift.
     Insecure kwarg defaults to True.
