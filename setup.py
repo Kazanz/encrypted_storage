@@ -3,7 +3,7 @@ from setuptools import setup
 if __name__ == '__main__':
     setup(
         name='encrypted-storage',
-        version='1.0.4',
+        version='1.0.6',
         author='Zach Kazanski',
         author_email='kazanski.zachary@gmail.com',
         description='Easy, cryptographically secure storage on numerous database backends.',
@@ -12,12 +12,12 @@ if __name__ == '__main__':
         packages=['encrypted_storage'],
         keywords=['cryptography', 'encryption'],
         install_requires=[
-            'futures==3.0.3',
-            'pycrypto==2.6.1',
-            'python-swiftclient==2.5.0',
-            'redis==2.10.3',
-            'requests==2.7.0',
-            'six==1.9.0',
+            'futures>=3.0.3',
+            'pycrypto>=2.6.1',
+            'python-swiftclient>=2.5.0',
+            'redis>=2.10.3',
+            'requests>=2.7.0',
+            'six>=1.9.0',
         ],
         classifiers=[
             'Programming Language :: Python',
