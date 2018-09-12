@@ -2,7 +2,7 @@ import pytest
 from Crypto.PublicKey import RSA
 from mock import MagicMock
 
-from encrypted_storage import (
+from hivelocity_encrypted_storage import (
     AESCipher,
     EncryptedSharedStorage,
     EncryptedRedisStorage,
