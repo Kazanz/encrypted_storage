@@ -112,6 +112,7 @@ Contributing
 
 1. Follow Pep8.
 2. Write tests.
+3. Increment version number.
 
 If there is a backend you want that is not here, write one and open a pull request.
 
